@@ -1,0 +1,30 @@
+<br/>
+<div class="container" (swipeleft)="next()" (swiperight)="prev()">
+  <div class="input-group mb-3">
+  <input type="text" class="form-control" placeholder="Search for question" aria-label="Question Search" aria-describedby="questionssearch" [(ngModel)]="searchString" (keyup.enter)="search()" (blur)="controlsDisabled=false"(focus)="controlsDisabled=true">
+  <div class="input-group-append">
+    <span class="input-group-text" id="clear" (click)="clearSearch()"><i class="fas fa-times"></i></span>
+    <span class="input-group-text" id="questionssearch" (click)="search()"><i class="fas fa-search"></i></span>
+  </div>
+</div>
+	<div class="card">
+		<div class="card-header">
+			<i class="fas fa-graduation-cap"></i> Aufgabenteil <b>{{currentQuestion.section}}</b> - Frage <b>{{currentQuestion.id}}</b>
+		</div>
+		<div class="card-body">
+			<h5 class="card-title">{{currentQuestion.q}}</h5>
+			<div [hidden]="currentQuestion.textonly" *ngFor="let option of currentQuestion.o">
+				<div class="form-group form-check">
+					<input type="checkbox" class="form-check-input" id="option{{option.id}}" (click)="check(option.id)">
+          <label class="form-check-label" for="option{{option.id}}"><b>{{option.id}})</b> {{option.text}}</label>
+        </div>
+      </div>
+
+      <p [style.color]="answerStringColor">{{answerString}}</p>
+
+      <button #prevButton class="btn btn-light" (click)="prev()"><</button>
+      <button class="btn btn-primary" (click)="showAnswers()">Check</button>
+      <button #nextButton class="btn btn-light" (click)="next()">></button>
+    </div>
+  </div>
+</div>
